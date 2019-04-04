@@ -1,6 +1,6 @@
 package com.waelkhelil.immob
 
-
+import androidx.lifecycle.ViewModelProviders
 import android.app.Activity.RESULT_OK
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,11 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.content.Intent
-import android.widget.Toast
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
-import android.net.Uri
-import java.io.FileNotFoundException
 import android.os.AsyncTask
 import android.util.Log
 import android.widget.ImageView
@@ -24,6 +21,7 @@ class AddPostFragment : Fragment() {
     companion object {
         val RESULT_LOAD_IMG = 0
     }
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +36,12 @@ class AddPostFragment : Fragment() {
 
         val lButtonAddImage = view.findViewById<Button>(R.id.button_add_image)
         lButtonAddImage.setOnClickListener { v -> pickPhotos() }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        // TODO: Use the ViewModel
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -87,6 +91,7 @@ class AddPostFragment : Fragment() {
         }
 
         override fun onPostExecute(result: Bitmap) {
+
 //            imageView.setImageBitmap(result)
         }
     }
