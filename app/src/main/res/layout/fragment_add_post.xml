@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   tools:context=".ExploreFragment" android:padding="8dp">
+<androidx.constraintlayout.widget.ConstraintLayout
+       xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       tools:context=".AddPostFragment" android:padding="8dp">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -19,7 +20,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView">
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:id="@+id/linearLayout" tools:layout_editor_absoluteX="8dp">
         <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,5 +45,38 @@
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/constraintLayout" android:layout_marginTop="32dp">
+        <TextView
+                android:text="Images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView2"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:fontFamily="@font/montserrat_semibold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+        />
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_add_image"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_add"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
