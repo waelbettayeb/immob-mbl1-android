@@ -6,4 +6,7 @@
     <string name="menu_add">Add</string>
     <string name="menu_explore">Explore</string>
     <string name="menu_search">Search</string>
+    <string name="text_post_name">Listing title</string>
+    <string name="text_phone_number">Phone number</string>
+    <string name="add_listing">Add listing</string>
 </resources>
