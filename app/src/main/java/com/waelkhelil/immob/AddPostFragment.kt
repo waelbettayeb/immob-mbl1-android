@@ -11,15 +11,21 @@ import android.widget.Button
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.AsyncTask
 import android.util.Log
-import android.widget.ImageView
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import java.io.InputStream
 
 
 class AddPostFragment : Fragment() {
 
     companion object {
-        val RESULT_LOAD_IMG = 0
+        const val RESULT_LOAD_IMG = 0
     }
     private lateinit var viewModel: MainViewModel
 
@@ -35,13 +41,27 @@ class AddPostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val lButtonAddImage = view.findViewById<Button>(R.id.button_add_image)
-        lButtonAddImage.setOnClickListener { v -> pickPhotos() }
+        lButtonAddImage.setOnClickListener { pickPhotos() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        val layoutManager = LinearLayoutManager(context)
+        val recyclerView = view?.findViewById(R.id.rv_image) as RecyclerView
+        recyclerView.layoutManager = layoutManager
+        recyclerView.hasFixedSize()
+        viewModel.bitmaps.observe(viewLifecycleOwner, Observer {
+            it?.also {
+
+                recyclerView.adapter = ImageAdapter(it)
+            }
+        })
+//        recyclerView.adapter = ImageAdapter(List())
+        recyclerView.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
+
+//        binding.viewModel = viewModel
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -52,11 +72,11 @@ class AddPostFragment : Fragment() {
                     if (clipData != null) { // handle multiple photo
                         for (i in 0 until clipData.itemCount) {
                             val uri = clipData.getItemAt(i).uri
-//                            importPhoto(uri)
+                            DownloadImageFromUri().execute(uri)
                         }
                     } else { // handle single photo
-                        val uri = data?.data
-//                        importPhoto(uri)
+                        val uri = data.data
+                        DownloadImageFromUri().execute(uri)
                     }
                 }
             }
@@ -70,17 +90,16 @@ class AddPostFragment : Fragment() {
         startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG)
     }
 
-    private inner class DownloadImageFromUrl(internal var imageView: ImageView) :
-        AsyncTask<String, Void, Bitmap>() {
-        fun DownloadImageFromUrl(imageView: ImageView) {
-            this.imageView = imageView
-        }
-        override fun doInBackground(vararg urls: String): Bitmap? {
-            val imageURL = urls[0]
-            var bimage: Bitmap? = null
+    private inner class DownloadImageFromUri :
+        AsyncTask<Uri, Void, Bitmap>() {
+
+        override fun doInBackground(vararg uris: Uri): Bitmap? {
+            val imageUri = uris[0]
+            lateinit var bimage: Bitmap
             try {
-                val `in` = java.net.URL(imageURL).openStream()
-                bimage = BitmapFactory.decodeStream(`in`)
+                val contentResolver = context?.contentResolver
+                val imageStream: InputStream? = contentResolver?.openInputStream(imageUri)
+                bimage = BitmapFactory.decodeStream(imageStream)
 
             } catch (e: Exception) {
                 Log.e("Error Message", e.message)
@@ -91,8 +110,7 @@ class AddPostFragment : Fragment() {
         }
 
         override fun onPostExecute(result: Bitmap) {
-
-//            imageView.setImageBitmap(result)
+            viewModel.addBitmaps(result)
         }
     }
 

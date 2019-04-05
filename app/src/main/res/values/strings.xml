@@ -9,4 +9,5 @@
     <string name="text_post_name">Listing title</string>
     <string name="text_phone_number">Phone number</string>
     <string name="add_listing">Add listing</string>
+    <string name="images">Images</string>
 </resources>
