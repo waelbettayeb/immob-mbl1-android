@@ -12,6 +12,7 @@ class MainViewModel : ViewModel() {
 
     fun addBitmaps(vararg bitmap: Bitmap){
         newBitmaps.addAll(bitmap)
+
         bitmaps.postValue(newBitmaps)
     }
 }

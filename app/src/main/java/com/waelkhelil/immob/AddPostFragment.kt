@@ -58,6 +58,7 @@ class AddPostFragment : Fragment() {
         val layoutManager = GridLayoutManager(context,3)
         val recyclerView = view?.findViewById(R.id.rv_image) as RecyclerView
         recyclerView.layoutManager = layoutManager
+        recyclerView.setHasFixedSize(true)
         recyclerView.hasFixedSize()
         viewModel.bitmaps.observe(viewLifecycleOwner, Observer<MutableList<Bitmap>> {
             it?.also {
@@ -106,7 +107,11 @@ class AddPostFragment : Fragment() {
             try {
                 val contentResolver = context?.contentResolver
                 val imageStream: InputStream? = contentResolver?.openInputStream(imageUri)
-                bimage = BitmapFactory.decodeStream(imageStream)
+
+                val options = BitmapFactory.Options()
+                options.inPreferredConfig = Bitmap.Config.RGB_565
+
+                bimage = BitmapFactory.decodeStream(imageStream, null, options)
 
             } catch (e: Exception) {
                 Log.e("Error Message", e.message)
