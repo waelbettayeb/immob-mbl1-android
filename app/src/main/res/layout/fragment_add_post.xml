@@ -13,8 +13,7 @@
             android:text="@string/add_listing"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/textView" android:layout_width="0dp" android:fontFamily="@font/montserrat_semibold"
-            android:layout_marginTop="8dp"/>
+            android:id="@+id/textView" android:layout_width="0dp" android:fontFamily="@font/montserrat_semibold"/>
 
     <LinearLayout
             android:orientation="vertical"
