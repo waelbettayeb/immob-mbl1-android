@@ -17,6 +17,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.InputStream
@@ -28,6 +29,14 @@ class AddPostFragment : Fragment() {
         const val RESULT_LOAD_IMG = 0
     }
     private lateinit var viewModel: MainViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Share data between fragments
+        viewModel = activity?.run {
+            ViewModelProviders.of(this).get(MainViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,18 +55,16 @@ class AddPostFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-
-        val layoutManager = LinearLayoutManager(context)
+        val layoutManager = GridLayoutManager(context,3)
         val recyclerView = view?.findViewById(R.id.rv_image) as RecyclerView
         recyclerView.layoutManager = layoutManager
         recyclerView.hasFixedSize()
-        viewModel.bitmaps.observe(viewLifecycleOwner, Observer {
+        viewModel.bitmaps.observe(viewLifecycleOwner, Observer<MutableList<Bitmap>> {
             it?.also {
-
                 recyclerView.adapter = ImageAdapter(it)
             }
         })
+
 //        recyclerView.adapter = ImageAdapter(List())
         recyclerView.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
 
