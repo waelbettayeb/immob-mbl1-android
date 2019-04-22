@@ -15,6 +15,7 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.util.Log
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.io.InputStream
 
 
-class AddPostFragment : Fragment() {
+class CreateNewListingDialogFragment : DialogFragment() {
 
     companion object {
         const val RESULT_LOAD_IMG = 0

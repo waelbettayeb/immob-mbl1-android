@@ -7,7 +7,7 @@
 
     <fragment android:id="@+id/ExploreFragment" android:name="com.waelkhelil.immob.ExploreFragment"
               android:label="@string/menu_explore" tools:layout="@layout/fragment_explore"/>
-    <fragment android:id="@+id/AddPostFragment" android:name="com.waelkhelil.immob.AddPostFragment"
+    <fragment android:id="@+id/AddPostFragment" android:name="com.waelkhelil.immob.CreateNewListingDialogFragment"
               android:label="@string/menu_add" tools:layout="@layout/fragment_add_post"/>
     <fragment android:id="@+id/SearchFragment" android:name="com.waelkhelil.immob.SearchFragment"
               android:label="@string/menu_search" tools:layout="@layout/fragment_search"/>
