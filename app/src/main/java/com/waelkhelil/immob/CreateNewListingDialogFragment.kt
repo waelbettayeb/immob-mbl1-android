@@ -21,6 +21,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import com.waelkhelil.immob.model.Listing
 import java.io.InputStream
 
 
@@ -71,7 +74,30 @@ class CreateNewListingDialogFragment : DialogFragment() {
 
         val lButtonAddImage = view.findViewById<Button>(R.id.button_add_image)
         lButtonAddImage.setOnClickListener { pickPhotos() }
-
+        // Title Input
+        val lTextInputLayout = view.findViewById<TextInputLayout>(R.id.text_input_layout_title)
+        val lTitleEditText = view.findViewById<TextInputEditText>(R.id.text_input_title)
+        val buttonSaveButton = view.findViewById<Button>(R.id.button_save_listing)
+            buttonSaveButton?.setOnClickListener {
+            val title = lTitleEditText.text.toString()
+            val type = view.findViewById<Spinner>(R.id.spinner_type).selectedItem.toString()
+            val phoneNumber = view.findViewById<TextInputEditText>(R.id.text_input_phone_number).text.toString()
+            val price = view.findViewById<TextInputEditText>(R.id.text_input_price).text.toString()
+            val ListingType = if(type != "Sell") Listing.ListingType.LOAN else Listing.ListingType.SELL
+            if(title == ""){
+                lTextInputLayout.error = resources.getString(R.string.msg_please_add_a_title)
+            }else{
+                viewModel.addListing(Listing(
+                    title,
+                    ListingType,
+                    phoneNumber,
+                    price,
+                    viewModel.mBitmaps.value!!
+                ))
+                lTextInputLayout.error = null
+                dismissAllowingStateLoss()
+            }
+        }
 
     }
     override fun onStart() {
@@ -90,7 +116,7 @@ class CreateNewListingDialogFragment : DialogFragment() {
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
         recyclerView.hasFixedSize()
-        viewModel.mBitmaps.observe(viewLifecycleOwner, Observer<MutableList<Bitmap>> {
+        viewModel.mBitmaps.observe(viewLifecycleOwner, Observer<List<Bitmap>> {
             it?.also {
                 recyclerView.adapter = ImageAdapter(it)
             }

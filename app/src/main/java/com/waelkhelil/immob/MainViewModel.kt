@@ -7,9 +7,9 @@ import com.waelkhelil.immob.model.Listing
 
 
 class MainViewModel : ViewModel() {
-    val mBitmaps: MutableLiveData<MutableList<Bitmap>> = MutableLiveData()
+    val mBitmaps: MutableLiveData<List<Bitmap>> = MutableLiveData(listOf())
     private val mNewBitmaps = mutableListOf<Bitmap>()
-    val mListing: MutableLiveData<MutableList<Listing>> = MutableLiveData()
+    val mListing: MutableLiveData<List<Listing>> = MutableLiveData(listOf())
     private val newListing = mutableListOf<Listing>()
 
     fun addBitmaps(vararg bitmap: Bitmap){
@@ -23,5 +23,6 @@ class MainViewModel : ViewModel() {
     fun addListing(vararg listing: Listing){
         newListing.addAll(listing)
         mListing.postValue(newListing)
+        freeBitmaps()
     }
 }

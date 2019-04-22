@@ -10,6 +10,7 @@
     <string name="images">Images</string>
     <string name="save">save</string>
     <string name="price">Price</string>
+    <string name="msg_please_add_a_title">Please add a title</string>
     <string-array name="listing_type">
         <item>Sell</item>
         <item>Loan</item>

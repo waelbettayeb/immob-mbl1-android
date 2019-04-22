@@ -7,7 +7,7 @@ data class Listing(
     val mTitle:String,
     val mType:ListingType,
     val mPhoneNumber:String,
-    val mPrice:Int,
+    val mPrice:String,
     val mBitmaps:List<Bitmap>
 ){
     val mPostingDate = Calendar.getInstance()
