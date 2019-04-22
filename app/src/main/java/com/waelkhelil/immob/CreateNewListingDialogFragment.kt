@@ -1,9 +1,14 @@
 package com.waelkhelil.immob
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
@@ -15,6 +20,8 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -78,21 +85,25 @@ class CreateNewListingDialogFragment : DialogFragment() {
         val lTextInputLayout = view.findViewById<TextInputLayout>(R.id.text_input_layout_title)
         val lTitleEditText = view.findViewById<TextInputEditText>(R.id.text_input_title)
         val buttonSaveButton = view.findViewById<Button>(R.id.button_save_listing)
+
             buttonSaveButton?.setOnClickListener {
             val title = lTitleEditText.text.toString()
             val type = view.findViewById<Spinner>(R.id.spinner_type).selectedItem.toString()
             val phoneNumber = view.findViewById<TextInputEditText>(R.id.text_input_phone_number).text.toString()
             val price = view.findViewById<TextInputEditText>(R.id.text_input_price).text.toString()
             val ListingType = if(type != "Sell") Listing.ListingType.LOAN else Listing.ListingType.SELL
+
             if(title == ""){
                 lTextInputLayout.error = resources.getString(R.string.msg_please_add_a_title)
             }else{
+
                 viewModel.addListing(Listing(
                     title,
                     ListingType,
                     phoneNumber,
                     price,
-                    viewModel.mBitmaps.value!!.toMutableList()
+                    viewModel.mBitmaps.value!!.toMutableList(),
+                    getLocation()!!
                 ))
                 lTextInputLayout.error = null
                 dismissAllowingStateLoss()
@@ -178,5 +189,20 @@ class CreateNewListingDialogFragment : DialogFragment() {
             viewModel.addBitmaps(result)
         }
     }
+    fun getLocation():Location?{
+        var location : Location? = null
+        val locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
+        if (checkSelfPermission(context as Context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+            ActivityCompat.requestPermissions(requireActivity(), permissions,0)
+        }
+        if (checkSelfPermission(context as Context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            val permissions = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION)
+            ActivityCompat.requestPermissions(requireActivity(), permissions,0)
+        }
+
+        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        return location
+    }
 }

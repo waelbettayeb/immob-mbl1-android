@@ -15,6 +15,9 @@ import java.util.*
 import androidx.core.content.ContextCompat.startActivity
 import android.content.Intent
 import android.net.Uri
+import androidx.core.content.ContextCompat.startActivity
+
+
 
 
 class ListingAdapter(private val list: List<Listing>, val context:Context)
@@ -58,6 +61,14 @@ class ListingAdapter(private val list: List<Listing>, val context:Context)
                 val callIntent = Intent(Intent.ACTION_DIAL)
                 callIntent.data = Uri.parse("tel:" + pListing.mPhoneNumber)//change the number
                 startActivity(context, callIntent,null)
+            }
+            itemView.findViewById<Button>(R.id.button_place).setOnClickListener {
+                val gmmIntentUri = Uri.parse("geo:${pListing.location.latitude},${pListing.location.longitude}")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                if (mapIntent.resolveActivity(context.packageManager) != null) {
+                    startActivity(context, mapIntent, null)
+                }
             }
             val recyclerView = itemView.findViewById(R.id.recyclerView) as RecyclerView
             recyclerView.setHasFixedSize(true)
