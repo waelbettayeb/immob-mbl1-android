@@ -53,7 +53,10 @@ class CreateNewListingDialogFragment : DialogFragment() {
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar_new_listing)
         toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp)
-        toolbar.setNavigationOnClickListener{ dismissAllowingStateLoss() }
+        toolbar.setNavigationOnClickListener{
+            viewModel.freeBitmaps()
+            dismissAllowingStateLoss()
+        }
         toolbar.title = resources.getString(R.string.add_listing)
 
         val spinner: Spinner = view.findViewById(R.id.spinner_type)
@@ -87,16 +90,14 @@ class CreateNewListingDialogFragment : DialogFragment() {
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
         recyclerView.hasFixedSize()
-        viewModel.bitmaps.observe(viewLifecycleOwner, Observer<MutableList<Bitmap>> {
+        viewModel.mBitmaps.observe(viewLifecycleOwner, Observer<MutableList<Bitmap>> {
             it?.also {
                 recyclerView.adapter = ImageAdapter(it)
             }
         })
 
-//        recyclerView.adapter = ImageAdapter(List())
         recyclerView.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
 
-//        binding.viewModel = viewModel
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
