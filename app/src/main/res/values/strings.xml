@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">immob</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_add">Add</string>
     <string name="menu_explore">Explore</string>
     <string name="menu_search">Search</string>
     <string name="text_post_name">Listing title</string>
     <string name="text_phone_number">Phone number</string>
-    <string name="add_listing">Add listing</string>
+    <string name="add_listing">Create new listing</string>
     <string name="images">Images</string>
     <string name="save">save</string>
     <string name="price">Price</string>
