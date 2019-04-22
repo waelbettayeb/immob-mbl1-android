@@ -11,7 +11,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
@@ -54,8 +56,22 @@ class CreateNewListingDialogFragment : DialogFragment() {
         toolbar.setNavigationOnClickListener{ dismissAllowingStateLoss() }
         toolbar.title = resources.getString(R.string.add_listing)
 
+        val spinner: Spinner = view.findViewById(R.id.spinner_type)
+        ArrayAdapter.createFromResource(
+            context,
+            R.array.listing_type,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
         val lButtonAddImage = view.findViewById<Button>(R.id.button_add_image)
         lButtonAddImage.setOnClickListener { pickPhotos() }
+
+
     }
     override fun onStart() {
         super.onStart()
