@@ -62,9 +62,7 @@ class CreateNewListingDialogFragment : DialogFragment() {
             R.array.listing_type,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
 
@@ -127,8 +125,7 @@ class CreateNewListingDialogFragment : DialogFragment() {
         startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG)
     }
 
-    private inner class DownloadImageFromUri :
-        AsyncTask<Uri, Void, Bitmap>() {
+    private inner class DownloadImageFromUri : AsyncTask<Uri, Void, Bitmap>() {
 
         override fun doInBackground(vararg uris: Uri): Bitmap? {
             val imageUri = uris[0]
