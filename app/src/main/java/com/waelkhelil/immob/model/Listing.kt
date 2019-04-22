@@ -10,7 +10,7 @@ data class Listing(
     val mPrice:String,
     val mBitmaps:List<Bitmap>
 ){
-    val mPostingDate = Calendar.getInstance()
+    val mPostingDate:Calendar = Calendar.getInstance(Locale.getDefault())
 
     enum class ListingType{
         SELL, LOAN
