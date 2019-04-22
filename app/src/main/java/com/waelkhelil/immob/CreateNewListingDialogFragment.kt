@@ -1,25 +1,23 @@
 package com.waelkhelil.immob
 
-import androidx.lifecycle.ViewModelProviders
 import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import android.net.Uri
-import android.os.AsyncTask
-import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.InputStream
 
@@ -28,6 +26,7 @@ class CreateNewListingDialogFragment : DialogFragment() {
 
     companion object {
         const val RESULT_LOAD_IMG = 0
+        const val TAG = "CreateNewListingDialogFragment"
     }
     private lateinit var viewModel: MainViewModel
 
@@ -50,10 +49,23 @@ class CreateNewListingDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar_new_listing)
+        toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp)
+        toolbar.setNavigationOnClickListener{ dismissAllowingStateLoss() }
+        toolbar.title = resources.getString(R.string.add_listing)
+
         val lButtonAddImage = view.findViewById<Button>(R.id.button_add_image)
         lButtonAddImage.setOnClickListener { pickPhotos() }
     }
-
+    override fun onStart() {
+        super.onStart()
+        val dialog = dialog
+        if (dialog != null) {
+            val width = ViewGroup.LayoutParams.MATCH_PARENT
+            val height = ViewGroup.LayoutParams.MATCH_PARENT
+            dialog.window.setLayout(width, height)
+        }
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val layoutManager = GridLayoutManager(context,3)

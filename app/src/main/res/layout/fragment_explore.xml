@@ -15,7 +15,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
-            android:id="@+id/call_button"
+            android:id="@+id/ftb_create_new_listing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"

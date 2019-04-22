@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import ru.dimorinny.floatingtextbutton.FloatingTextButton
 
 class ExploreFragment : Fragment() {
 
@@ -21,4 +22,13 @@ class ExploreFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_explore, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val lButtonCreateNewListing = view.findViewById<FloatingTextButton>(R.id.ftb_create_new_listing)
+        lButtonCreateNewListing.setOnClickListener {
+            val dialog = CreateNewListingDialogFragment()
+            val ft = fragmentManager!!.beginTransaction()
+            dialog.show(ft, CreateNewListingDialogFragment.TAG)
+        }
+    }
 }
