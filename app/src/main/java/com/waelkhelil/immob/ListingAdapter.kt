@@ -1,5 +1,6 @@
 package com.waelkhelil.immob
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,8 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.waelkhelil.immob.model.Listing
 import java.util.*
+import androidx.core.content.ContextCompat.startActivity
+import android.content.Intent
+import android.net.Uri
 
-class ListingAdapter(private val list: List<Listing>)
+
+class ListingAdapter(private val list: List<Listing>, val context:Context)
     : RecyclerView.Adapter<ListingAdapter.ListingViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListingViewHolder {
@@ -22,7 +27,7 @@ class ListingAdapter(private val list: List<Listing>)
 
     override fun onBindViewHolder(holder: ListingViewHolder, position: Int) {
         val lListing: Listing = list[position]
-        holder.bind(lListing)
+        holder.bind(lListing, context)
     }
 
     override fun getItemCount(): Int = list.size
@@ -34,7 +39,7 @@ class ListingAdapter(private val list: List<Listing>)
         init {
         }
 
-        fun bind(pListing: Listing) {
+        fun bind(pListing: Listing, context:Context) {
             mListing = pListing
             val locale = Locale.getDefault()
 
@@ -49,7 +54,11 @@ class ListingAdapter(private val list: List<Listing>)
                     pListing.mPostingDate.get(Calendar.MINUTE).toString().padStart(2, '0')
             itemView.findViewById<Button>(R.id.button_phone_number).text = pListing.mPhoneNumber
 
-
+            itemView.findViewById<Button>(R.id.button_phone_number).setOnClickListener {
+                val callIntent = Intent(Intent.ACTION_DIAL)
+                callIntent.data = Uri.parse("tel:" + pListing.mPhoneNumber)//change the number
+                startActivity(context, callIntent,null)
+            }
             val recyclerView = itemView.findViewById(R.id.recyclerView) as RecyclerView
             recyclerView.setHasFixedSize(true)
             recyclerView.adapter = ImageAdapter(pListing.mBitmaps)

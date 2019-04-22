@@ -51,7 +51,7 @@ class ExploreFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_listing)
         viewModel.mListing.observe(viewLifecycleOwner, Observer<List<Listing>> {
             it?.also {
-                recyclerView.adapter = ListingAdapter(it.reversed())
+                recyclerView.adapter = context?.let { it1 -> ListingAdapter(it.reversed(), it1) }
             }
         })
 
