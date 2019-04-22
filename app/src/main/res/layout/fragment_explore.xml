@@ -24,6 +24,5 @@
             app:floating_left_icon="@drawable/ic_add_white_24dp"
             app:floating_title="@string/add_listing"
             app:floating_title_color="@android:color/white"
-            app:layout_behavior="ru.dimorinny.floatingtextbutton.behavior.SnackbarBehavior"
-    />
+            app:layout_behavior="ru.dimorinny.floatingtextbutton.behavior.SnackbarBehavior"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
