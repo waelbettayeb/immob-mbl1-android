@@ -49,7 +49,6 @@ class ExploreFragment : Fragment() {
         }
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_listing)
-        recyclerView.setHasFixedSize(true)
         viewModel.mListing.observe(viewLifecycleOwner, Observer<List<Listing>> {
             it?.also {
                 recyclerView.adapter = ListingAdapter(it.reversed())

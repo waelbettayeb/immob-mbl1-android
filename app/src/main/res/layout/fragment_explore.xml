@@ -5,16 +5,20 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context=".ExploreFragment">
-
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rv_listing"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rv_listing"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            <View android:layout_width="match_parent" android:layout_height="100dp"/>
+        </LinearLayout>
+    </ScrollView>
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
             android:id="@+id/ftb_create_new_listing"
@@ -25,6 +29,5 @@
             app:floating_background_color="?attr/colorPrimary"
             app:floating_left_icon="@drawable/ic_add_white_24dp"
             app:floating_title="@string/add_listing"
-            app:floating_title_color="@android:color/white"
-            app:layout_behavior="ru.dimorinny.floatingtextbutton.behavior.SnackbarBehavior"/>
+            app:floating_title_color="@android:color/white"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
