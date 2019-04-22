@@ -92,7 +92,7 @@ class CreateNewListingDialogFragment : DialogFragment() {
                     ListingType,
                     phoneNumber,
                     price,
-                    viewModel.mBitmaps.value!!
+                    viewModel.mBitmaps.value!!.toMutableList()
                 ))
                 lTextInputLayout.error = null
                 dismissAllowingStateLoss()

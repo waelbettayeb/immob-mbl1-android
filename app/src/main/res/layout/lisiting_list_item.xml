@@ -59,11 +59,16 @@
                 </LinearLayout>
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
-                    tools:layout_editor_absoluteX="0dp" android:layout_marginTop="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/layout_image"
+                    app:reverseLayout="true"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout5" android:id="@+id/recyclerView"
-                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/linearLayout2">
+                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent">
             </androidx.recyclerview.widget.RecyclerView>
             <LinearLayout
                     android:orientation="horizontal"

@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.waelkhelil.immob.model.Listing
 import java.util.*
@@ -47,6 +49,10 @@ class ListingAdapter(private val list: List<Listing>)
                     pListing.mPostingDate.get(Calendar.MINUTE).toString().padStart(2, '0')
             itemView.findViewById<Button>(R.id.button_phone_number).text = pListing.mPhoneNumber
 
+
+            val recyclerView = itemView.findViewById(R.id.recyclerView) as RecyclerView
+            recyclerView.setHasFixedSize(true)
+            recyclerView.adapter = ImageAdapter(pListing.mBitmaps)
         }
     }
 }

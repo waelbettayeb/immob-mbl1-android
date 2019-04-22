@@ -15,6 +15,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.waelkhelil.immob.model.Listing
 import ru.dimorinny.floatingtextbutton.FloatingTextButton
@@ -51,7 +52,7 @@ class ExploreFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         viewModel.mListing.observe(viewLifecycleOwner, Observer<List<Listing>> {
             it?.also {
-                recyclerView.adapter = ListingAdapter(it)
+                recyclerView.adapter = ListingAdapter(it.reversed())
             }
         })
 
