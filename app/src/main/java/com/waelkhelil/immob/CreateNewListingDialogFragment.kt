@@ -62,11 +62,14 @@ class CreateNewListingDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar_new_listing)
+
         toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp)
+
         toolbar.setNavigationOnClickListener{
             viewModel.freeBitmaps()
             dismissAllowingStateLoss()
         }
+
         toolbar.title = resources.getString(R.string.add_listing)
 
         val spinner: Spinner = view.findViewById(R.id.spinner_type)
@@ -80,6 +83,7 @@ class CreateNewListingDialogFragment : DialogFragment() {
         }
 
         val lButtonAddImage = view.findViewById<Button>(R.id.button_add_image)
+
         lButtonAddImage.setOnClickListener { pickPhotos() }
         // Title Input
         val lTextInputLayout = view.findViewById<TextInputLayout>(R.id.text_input_layout_title)
@@ -109,6 +113,7 @@ class CreateNewListingDialogFragment : DialogFragment() {
                 dismissAllowingStateLoss()
             }
         }
+        // The end of the listener
 
     }
     override fun onStart() {
@@ -189,6 +194,8 @@ class CreateNewListingDialogFragment : DialogFragment() {
             viewModel.addBitmaps(result)
         }
     }
+
+
     fun getLocation():Location?{
         var location : Location? = null
         val locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager

@@ -34,13 +34,14 @@ class ListingAdapter(private val list: List<Listing>, val context:Context)
     }
 
     override fun getItemCount(): Int = list.size
+
+
     class ListingViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.lisiting_list_item, parent, false)){
+
         private var mListing: Listing? = null
 
-
-        init {
-        }
+        init { }
 
         fun bind(pListing: Listing, context:Context) {
             mListing = pListing
@@ -62,6 +63,8 @@ class ListingAdapter(private val list: List<Listing>, val context:Context)
                 callIntent.data = Uri.parse("tel:" + pListing.mPhoneNumber)//change the number
                 startActivity(context, callIntent,null)
             }
+
+
             itemView.findViewById<Button>(R.id.button_place).setOnClickListener {
                 val gmmIntentUri = Uri.parse("geo:${pListing.location.latitude},${pListing.location.longitude}")
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
@@ -70,6 +73,8 @@ class ListingAdapter(private val list: List<Listing>, val context:Context)
                     startActivity(context, mapIntent, null)
                 }
             }
+
+
             val recyclerView = itemView.findViewById(R.id.recyclerView) as RecyclerView
             recyclerView.setHasFixedSize(true)
             recyclerView.adapter = ImageAdapter(pListing.mBitmaps)

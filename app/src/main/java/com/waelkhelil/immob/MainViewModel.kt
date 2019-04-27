@@ -7,8 +7,10 @@ import com.waelkhelil.immob.model.Listing
 
 
 class MainViewModel : ViewModel() {
+
     val mBitmaps: MutableLiveData<List<Bitmap>> = MutableLiveData(listOf())
     private val mNewBitmaps = mutableListOf<Bitmap>()
+
     val mListing: MutableLiveData<List<Listing>> = MutableLiveData(listOf())
     private val newListing = mutableListOf<Listing>()
 

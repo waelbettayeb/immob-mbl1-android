@@ -21,15 +21,18 @@ import com.waelkhelil.immob.model.Listing
 import ru.dimorinny.floatingtextbutton.FloatingTextButton
 
 class ExploreFragment : Fragment() {
+
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         // Share data between fragments
         viewModel = activity?.run {
             ViewModelProviders.of(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +42,9 @@ class ExploreFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
+
         val lButtonCreateNewListing = view.findViewById<FloatingTextButton>(R.id.ftb_create_new_listing)
 
         lButtonCreateNewListing.setOnClickListener {

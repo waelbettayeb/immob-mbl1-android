@@ -15,8 +15,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val navController = findNavController(this, R.id.nav_host_fragment)
+
+
         val lBottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
+
         NavigationUI.setupWithNavController(toolbar, navController)
         NavigationUI.setupWithNavController(lBottomNavigationView, navController)
     }
