@@ -1,23 +1,15 @@
 package com.waelkhelil.immob
 
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.waelkhelil.immob.model.Listing
+import com.waelkhelil.immob.model.Intervention
 import ru.dimorinny.floatingtextbutton.FloatingTextButton
 
 class ExploreFragment : Fragment() {
@@ -43,15 +35,15 @@ class ExploreFragment : Fragment() {
         val lButtonCreateNewListing = view.findViewById<FloatingTextButton>(R.id.ftb_create_new_listing)
 
         lButtonCreateNewListing.setOnClickListener {
-            val dialog = CreateNewListingDialogFragment()
+            val dialog = CreateInterventionDialogFragment()
             val ft = fragmentManager!!.beginTransaction()
-            dialog.show(ft, CreateNewListingDialogFragment.TAG)
+            dialog.show(ft, CreateInterventionDialogFragment.TAG)
         }
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_listing)
-        viewModel.mListing.observe(viewLifecycleOwner, Observer<List<Listing>> {
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rv_intervention)
+        viewModel.mIntervention.observe(viewLifecycleOwner, Observer<List<Intervention>> {
             it?.also {
-                recyclerView.adapter = context?.let { it1 -> ListingAdapter(it.reversed(), it1) }
+                recyclerView.adapter = InterventionAdapter(it.reversed())
             }
         })
 

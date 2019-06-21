@@ -1,28 +1,36 @@
 package com.waelkhelil.immob
 
-import android.graphics.Bitmap
+import android.os.Environment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
-import com.waelkhelil.immob.model.Listing
+import com.google.gson.Gson
+import com.waelkhelil.immob.model.Intervention
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 class MainViewModel : ViewModel() {
-    val mBitmaps: MutableLiveData<List<Bitmap>> = MutableLiveData(listOf())
-    private val mNewBitmaps = mutableListOf<Bitmap>()
-    val mListing: MutableLiveData<List<Listing>> = MutableLiveData(listOf())
-    private val newListing = mutableListOf<Listing>()
+    val mIntervention: MutableLiveData<List<Intervention>> = MutableLiveData(listOf())
+    private val newIntervention = mutableListOf<Intervention>()
+    val fileName = "PostJson.json"
 
-    fun addBitmaps(vararg bitmap: Bitmap){
-        mNewBitmaps.addAll(bitmap)
-        mBitmaps.postValue(mNewBitmaps)
+    fun addIntervention(vararg intervention: Intervention){
+        newIntervention.addAll(intervention)
+        mIntervention.postValue(newIntervention)
+//        toJson()
+        writeJSONtoFile()
     }
-    fun freeBitmaps(){
-        mNewBitmaps.clear()
-        mBitmaps.postValue(mNewBitmaps)
+    private fun toJson():String{
+        val gson = Gson()
+        return gson.toJson(mIntervention.value)
     }
-    fun addListing(vararg listing: Listing){
-        newListing.addAll(listing)
-        mListing.postValue(newListing)
-        freeBitmaps()
+    private fun writeJSONtoFile() {
+        val file = File(Environment.getExternalStorageDirectory(),fileName)
+        file.printWriter().use { out ->
+            out.println(toJson())
+        }
     }
+
 }

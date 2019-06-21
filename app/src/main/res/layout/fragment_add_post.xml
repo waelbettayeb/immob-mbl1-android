@@ -17,23 +17,13 @@
                 android:layout_height="?attr/actionBarSize"/>
 
     </com.google.android.material.appbar.AppBarLayout>
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".CreateNewListingDialogFragment" android:padding="8dp">
-
-            <!-- TODO: Update blank fragment layout -->
-
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/linearLayout" tools:layout_editor_absoluteX="8dp" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
                 <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -42,13 +32,14 @@
                             android:layout_width="0dp"
                             android:layout_weight="2"
                             android:layout_height="wrap_content"
-                            android:hint="@string/text_post_name"
-                            android:id="@+id/text_input_layout_title">
+                            android:hint="@string/number"
+                            android:id="@+id/text_input_layout_number">
 
                         <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
+                                android:inputType="numberDecimal"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/text_input_title"/>
+                                android:id="@+id/text_input_number"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
                     <Spinner
@@ -60,71 +51,19 @@
                 <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/text_phone_number">
+                        android:hint="@string/text_plumber_name">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="phone"
-                            android:ems="10"
-                            android:id="@+id/text_input_phone_number"/>
+                            android:id="@+id/text_input_plumber_name"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/price">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:ems="10"
-                            android:id="@+id/text_input_price"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:id="@+id/constraintLayout" android:layout_marginTop="8dp">
-                <TextView
-                        android:text="@string/images"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/textView2"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                        android:fontFamily="@font/montserrat_semibold"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                />
                 <com.google.android.material.button.MaterialButton
-                        android:id="@+id/button_add_image"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:id="@+id/button_save_intervention"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/menu_add"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        android:layout_height="match_parent"
+                        android:text="@string/save"/>
+            </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_image"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout" app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/button_save_listing"/>
-            <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_save_listing"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/save" android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

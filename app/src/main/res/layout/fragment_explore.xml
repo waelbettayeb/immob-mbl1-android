@@ -11,11 +11,11 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rv_listing"
+                    android:id="@+id/rv_intervention"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" android:padding="8dp"/>
             <View android:layout_width="match_parent" android:layout_height="100dp"/>
         </LinearLayout>
     </ScrollView>
@@ -28,6 +28,6 @@
             android:layout_marginBottom="16dp"
             app:floating_background_color="?attr/colorPrimary"
             app:floating_left_icon="@drawable/ic_add_white_24dp"
-            app:floating_title="@string/add_listing"
+            app:floating_title="@string/add_intervention"
             app:floating_title_color="@android:color/white"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

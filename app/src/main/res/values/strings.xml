@@ -1,19 +1,18 @@
 <resources>
-    <string name="app_name">immob</string>
+    <string name="app_name">m2s1e2</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_add">Add</string>
     <string name="menu_explore">Explore</string>
     <string name="menu_search">Search</string>
-    <string name="text_post_name">Listing title</string>
-    <string name="text_phone_number">Phone number</string>
-    <string name="add_listing">Create new listing</string>
-    <string name="images">Images</string>
+    <string name="add_intervention">Create new intervention</string>
     <string name="save">save</string>
-    <string name="price">Price</string>
-    <string name="msg_please_add_a_title">Please add a title</string>
-    <string-array name="listing_type">
-        <item>Sell</item>
-        <item>Loan</item>
+    <string name="msg_please_add_a_number">Please add a number</string>
+    <string name="button_save_intervention">Save intervention</string>
+    <string name="number">number</string>
+    <string name="text_plumber_name">Plumber name</string>
+    <string-array name="intervention_type">
+        <item>type01</item>
+        <item>type02</item>
     </string-array>
 
 </resources>
