@@ -19,7 +19,6 @@ class MainViewModel : ViewModel() {
     fun addIntervention(vararg intervention: Intervention){
         newIntervention.addAll(intervention)
         mIntervention.postValue(newIntervention)
-//        toJson()
         writeJSONtoFile()
     }
     private fun toJson():String{
